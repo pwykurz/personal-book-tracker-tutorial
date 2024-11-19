@@ -2,7 +2,7 @@
 ---
 
 For detailed information, visit the full guide here:  
-👉 **[Building a Personal Book Tracker with Next.js 15](https://epic-it.pl/building-a-personal-book-tracker-with-next-js-15-complete-guide-with-type-script-and-es-lint-configuration)** 👈  
+👉 **[Building a Personal Book Tracker with Next.js 15](https://thecodeconduit.com/building-a-personal-book-tracker-with-next-js-15-complete-guide-with-type-script-and-es-lint-configuration)** 👈  
 
 ---
 
