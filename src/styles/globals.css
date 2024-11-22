@@ -1,13 +1,59 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+/* Import Tailwind base styles */
+@tailwind base;
+
+/* Import Tailwind components */
+@tailwind components;
+
+/* Import Tailwind utilities */
+@tailwind utilities;
+
+/* Define CSS variables for colors and other properties */
+:root {
+    --primary-bg: #007bff; /* Primary background color */
+    --primary-text: #ffffff; /* Primary text color */
+
+    /* Optional secondary colors */
+    --secondary-bg: #f8f9fa;
+    --secondary-text: #212529;
 }
-main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
+
+/* Styling for the TopBar */
+.top-bar {
+    background-color: var(--primary-bg); /* Uses the primary background color */
+    color: var(--primary-text); /* Uses the primary text color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.hamburger-menu .icon {
+    color: inherit; /* Inherits color from the top-bar */
+}
+
+/* Global resets and defaults */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Use a clean, modern font */
+    background-color: var(--secondary-bg); /* Default background for pages */
+    color: var(--secondary-text); /* Default text color for pages */
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem; /* Adds padding for smaller screens */
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Optional: Dark mode setup */
+.dark {
+    --primary-bg: #212529;
+    --primary-text: #f8f9fa;
+    --secondary-bg: #121212;
+    --secondary-text: #e0e0e0;
 }
