@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import TopBar from '@/components/TopBar';
 import MainContainer from '@/components/MainContainer';
 import Footer from '@/components/Footer';
-import { useBooks } from '@/hooks/useBooks';
 import BookCard from '@/components/BookCard';
 import CategoryTabs from '@/components/CategoryTabs';
-import {Book} from '@/types/Book';
+import { Book } from '@/types/Book';
+import { useBooksStore } from '@/store/useBooksStore';
 
 const HomePage: React.FC = () => {
-  const { books, loading, addNewBook, editBook, removeBook } = useBooks();
+  const { books, addBook, editBook, deleteBook } = useBooksStore();
   const [newBook, setNewBook] = useState<Omit<Book, 'id'>>({ title: '', author: '', category: 'Reading' });
   const [activeCategory, setActiveCategory] = useState<'Reading' | 'Completed' | 'Wishlist'>('Reading');
 
@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
   // Function to handle deleting a book
   const handleDeleteBook = (id: string) => {
     if (confirm('Are you sure you want to delete this book?')) {
-      removeBook(id);
+      deleteBook(id);
     }
   };
 
@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
             <button
               onClick={() => {
                 if (newBook.title && newBook.author) {
-                  addNewBook(newBook);
+                  addBook(newBook);
                   setNewBook({ title: '', author: '', category: 'Reading' });
                 }
               }}
@@ -69,20 +69,16 @@ const HomePage: React.FC = () => {
 
           {/* Book List */}
           <div className="space-y-4">
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              books
-                .filter((book) => book.category === activeCategory)
-                .map((book) => (
-                  <BookCard
-                    key={book.id}
-                    book={book}
-                    onEdit={handleEditBook}
-                    onDelete={handleDeleteBook}
-                  />
-                ))
-            )}
+            {books
+              .filter((book) => book.category === activeCategory)
+              .map((book) => (
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  onEdit={handleEditBook}
+                  onDelete={handleDeleteBook}
+                />
+              ))}
           </div>
         </div>
       </MainContainer>

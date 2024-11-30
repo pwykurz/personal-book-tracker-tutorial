@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Book } from '@/types/Book';
 
 interface BookCardProps {
@@ -8,11 +8,29 @@ interface BookCardProps {
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book, onEdit, onDelete }) => {
+  const [selectedCategory, setSelectedCategory] = useState(book.category);
+
+  const handleCategoryChange = (newCategory: Book['category']) => {
+    setSelectedCategory(newCategory);
+    onEdit({ ...book, category: newCategory }); // Update the category via onEdit callback
+  };
+
   return (
     <div className="border border-gray-300 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out">
       <h3 className="text-lg font-semibold mb-2">{book.title}</h3>
       <p className="text-gray-600 mb-1">Author: {book.author}</p>
-      <p className="text-gray-600 mb-4">Category: {book.category}</p>
+      <div className="mb-4">
+        <p className="text-gray-600 inline-block mr-2">Category:</p>
+        <select
+          value={selectedCategory}
+          onChange={(e) => handleCategoryChange(e.target.value as Book['category'])}
+          className="border rounded px-2 py-1 text-sm"
+        >
+          <option value="Reading">Reading</option>
+          <option value="Completed">Completed</option>
+          <option value="Wishlist">Wishlist</option>
+        </select>
+      </div>
       <div className="flex space-x-4">
         <button
           onClick={() => onEdit(book)}
